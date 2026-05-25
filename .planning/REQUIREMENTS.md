@@ -116,21 +116,65 @@
 
 ---
 
-## Traceability (to be filled by roadmap)
+## Traceability
 
-| REQ-ID | Phase | Plan |
-|--------|-------|------|
-| DATA-01..08 | — | — |
-| CAT-01..11 | — | — |
-| AUTH-01..05 | — | — |
-| WATCH-01..04 | — | — |
-| PRICE-01..04 | — | — |
-| NOTIFY-01..06 | — | — |
-| CAL-01..04 | — | — |
-| B2B-01..05 | — | — |
-| GDPR-01..04 | — | — |
+| REQ-ID | Phase | Status |
+|--------|-------|--------|
+| DATA-01 | Phase 2: Data Ingestion | Pending |
+| DATA-02 | Phase 2: Data Ingestion | Pending |
+| DATA-03 | Phase 1: Foundation + Legal | Pending |
+| DATA-04 | Phase 1: Foundation + Legal | Pending |
+| DATA-05 | Phase 2: Data Ingestion | Pending |
+| DATA-06 | Phase 1: Foundation + Legal | Pending |
+| DATA-07 | Phase 1: Foundation + Legal | Pending |
+| DATA-08 | Phase 2: Data Ingestion | Pending |
+| CAT-01 | Phase 3: Public Catalog | Pending |
+| CAT-02 | Phase 3: Public Catalog | Pending |
+| CAT-03 | Phase 3: Public Catalog | Pending |
+| CAT-04 | Phase 3: Public Catalog | Pending |
+| CAT-05 | Phase 3: Public Catalog | Pending |
+| CAT-06 | Phase 3: Public Catalog | Pending |
+| CAT-07 | Phase 3: Public Catalog | Pending |
+| CAT-08 | Phase 3: Public Catalog | Pending |
+| CAT-09 | Phase 3: Public Catalog | Pending |
+| CAT-10 | Phase 3: Public Catalog | Pending |
+| CAT-11 | Phase 3: Public Catalog | Pending |
+| AUTH-01 | Phase 4: Auth + User Layer | Pending |
+| AUTH-02 | Phase 4: Auth + User Layer | Pending |
+| AUTH-03 | Phase 4: Auth + User Layer | Pending |
+| AUTH-04 | Phase 4: Auth + User Layer | Pending |
+| AUTH-05 | Phase 4: Auth + User Layer | Pending |
+| WATCH-01 | Phase 4: Auth + User Layer | Pending |
+| WATCH-02 | Phase 4: Auth + User Layer | Pending |
+| WATCH-03 | Phase 4: Auth + User Layer | Pending |
+| WATCH-04 | Phase 4: Auth + User Layer | Pending |
+| PRICE-01 | Phase 5: Price Tracking + Alerts | Pending |
+| PRICE-02 | Phase 5: Price Tracking + Alerts | Pending |
+| PRICE-03 | Phase 5: Price Tracking + Alerts | Pending |
+| PRICE-04 | Phase 5: Price Tracking + Alerts | Pending |
+| NOTIFY-01 | Phase 5: Price Tracking + Alerts | Pending |
+| NOTIFY-02 | Phase 5: Price Tracking + Alerts | Pending |
+| NOTIFY-03 | Phase 5: Price Tracking + Alerts | Pending |
+| NOTIFY-04 | Phase 5: Price Tracking + Alerts | Pending |
+| NOTIFY-05 | Phase 5: Price Tracking + Alerts | Pending |
+| NOTIFY-06 | Phase 5: Price Tracking + Alerts | Pending |
+| CAL-01 | Phase 6: Calendar Integration | Pending |
+| CAL-02 | Phase 6: Calendar Integration | Pending |
+| CAL-03 | Phase 6: Calendar Integration | Pending |
+| CAL-04 | Phase 6: Calendar Integration | Pending |
+| B2B-01 | Phase 7: B2B Dashboard | Pending |
+| B2B-02 | Phase 7: B2B Dashboard | Pending |
+| B2B-03 | Phase 7: B2B Dashboard | Pending |
+| B2B-04 | Phase 7: B2B Dashboard | Pending |
+| B2B-05 | Phase 7: B2B Dashboard | Pending |
+| GDPR-01 | Phase 1: Foundation + Legal | Pending |
+| GDPR-02 | Phase 1: Foundation + Legal | Pending |
+| GDPR-03 | Phase 1: Foundation + Legal | Pending |
+| GDPR-04 | Phase 1: Foundation + Legal | Pending |
 
 ---
 
-**Total v1 requirements:** 50
+**Total v1 requirements:** 51
 **Categories:** DATA (8), CAT (11), AUTH (5), WATCH (4), PRICE (4), NOTIFY (6), CAL (4), B2B (5), GDPR (4)
+
+> Note: Original count stated 50; actual distinct IDs total 51 (NOTIFY has 6 entries, not 5 as implied by the original sum). All 51 are mapped.
