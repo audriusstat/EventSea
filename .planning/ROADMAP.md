@@ -33,7 +33,12 @@
   3. Scraper worker skeleton on Fly.io runs BullMQ jobs; each source record tracks `last_successfully_scraped_at` and circuit-breaker state
   4. GDPR Article 30 processing register document created; privacy policy page live at `/privacy`; cookie consent architecture defined
   5. Scraping legal memo written (robots.txt policy per source, EU Directive 96/9/EC analysis, partner outreach plan for bilietai.lt and tiketa.lt)
-**Plans:** TBD
+**Plans:** 5 plans (3 waves)
+- [ ] 01-PLAN-monorepo-scaffold.md — Turborepo + pnpm scaffold, Docker Compose, CI/CD, Vitest (Wave 1)
+- [ ] 01-PLAN-db-schema.md — Drizzle 7-table schema, URL-hash IDs, cascade delete, [BLOCKING] migration (Wave 2)
+- [ ] 01-PLAN-worker-skeleton.md — BullMQ per-source queues, worker boots against Redis (Wave 2)
+- [ ] 01-PLAN-legal-gdpr-docs.md — scraping legal memo + Article 30 ROPA (Wave 2)
+- [ ] 01-PLAN-web-privacy-consent.md — /privacy route, cookie consent, home DB read (Wave 3)
 
 ### Phase 2: Data Ingestion
 **Mode:** mvp
