@@ -39,7 +39,7 @@ created: 2026-05-25
 | Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
 | schema-event-id | 01 | 1 | DATA-04 | — | URL hash must be deterministic | unit | `pnpm --filter db test -- event-id` | ❌ W0 | ⬜ pending |
-| schema-cascade | 01 | 1 | GDPR-04 | — | Deleting user cascades to watchlist, alert_log | migration test | `pnpm --filter db test -- cascade-delete` | ❌ W0 | ⬜ pending |
+| schema-cascade | 01 | 1 | GDPR-04 | — | Deleting user cascades to watchlist, alert_log | migration test | `pnpm --filter db test -- schema` | ❌ W0 | ⬜ pending |
 | schema-sources | 01 | 1 | DATA-07 | — | sources table has last_successfully_scraped_at + consecutive_failures | migration test | `pnpm --filter db test -- schema` | ❌ W0 | ⬜ pending |
 | worker-queues | 02 | 1 | DATA-03 | — | bilietai and tiketa are separate BullMQ Queue instances | unit | `pnpm --filter worker test -- queues` | ❌ W0 | ⬜ pending |
 | privacy-route | 03 | 2 | GDPR-01 | — | /privacy returns 200 with policy content | smoke | `pnpm --filter web test -- privacy` | ❌ W0 | ⬜ pending |

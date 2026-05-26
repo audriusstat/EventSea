@@ -154,7 +154,7 @@ Event ID generator (RESEARCH.md Pattern 10):
   </behavior>
   <action>
     Create packages/db/src/__tests__/event-id.test.ts (pure unit, no DB) covering the three event-id behaviors above — runnable via `pnpm --filter db test -- event-id`.
-    Create packages/db/src/__tests__/schema.test.ts as an integration test against local Docker Postgres (DATABASE_URL pointing at localhost:5432). It must: insert a sources row and a users row; insert a watchlist row and an alert_log row referencing them; assert both insert successfully (DATA-07 columns present, FK wiring works); then delete the user and assert watchlist + alert_log rows for that user are gone (GDPR-04 cascade); assert sources row has the consecutiveFailures + lastSuccessfullyScrapedAt fields populated. Use Drizzle query builder only — never raw `sql\`\`` string interpolation (threat T-02-01). Register this integration test under the turbo `test:integration` non-cacheable task (Pitfall 8) so a stale cache never reports a false pass; also runnable directly via `pnpm --filter db test -- schema` / `-- cascade-delete`. Delete the Plan 01 placeholder packages/db/src/__tests__/setup.test.ts.
+    Create packages/db/src/__tests__/schema.test.ts as an integration test against local Docker Postgres (DATABASE_URL pointing at localhost:5432). It must: insert a sources row and a users row; insert a watchlist row and an alert_log row referencing them; assert both insert successfully (DATA-07 columns present, FK wiring works); then delete the user and assert watchlist + alert_log rows for that user are gone (GDPR-04 cascade); assert sources row has the consecutiveFailures + lastSuccessfullyScrapedAt fields populated. Use Drizzle query builder only — never raw `sql\`\`` string interpolation (threat T-02-01). Register this integration test under the turbo `test:integration` non-cacheable task (Pitfall 8) so a stale cache never reports a false pass; also runnable directly via `pnpm --filter db test -- schema`. Delete the Plan 01 placeholder packages/db/src/__tests__/setup.test.ts.
     Note: this test requires the migration (Task 3) to have run; document that ordering — the executor runs Task 3 before asserting the integration test passes.
   </action>
   <verify>
@@ -165,8 +165,9 @@ Event ID generator (RESEARCH.md Pattern 10):
     - packages/db/src/__tests__/schema.test.ts exists and contains a user-delete assertion checking watchlist + alert_log rows are removed
     - schema.test.ts uses Drizzle query builder (no `sql\`` template with interpolated user input)
     - Plan 01 placeholder setup.test.ts no longer exists in packages/db
+    - NOTE: the cascade-delete and DATA-07 assertions in schema.test.ts are *written* in this task but are *verified* in Task 3's `<verify>` (via `pnpm --filter db test -- schema`) after the migration materializes the tables. This task's `<verify>` only runs the pure-unit event-id test, which passes without a live DB.
   </acceptance_criteria>
-  <done>Event-id unit test passes standalone; schema integration test written for cascade + DATA-07, wired to non-cacheable task, ready to pass once migration runs.</done>
+  <done>Event-id unit test passes standalone; schema integration test written for cascade + DATA-07, wired to non-cacheable task. The cascade-delete assertions in schema.test.ts are written here but verified in Task 3's `<verify>` after the migration runs — they cannot pass until the live tables exist.</done>
 </task>
 
 <task type="auto">

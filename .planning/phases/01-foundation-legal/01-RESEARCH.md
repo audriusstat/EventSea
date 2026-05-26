@@ -43,7 +43,7 @@
 | ID | Description | Research Support |
 |----|-------------|------------------|
 | DATA-03 | Scrapers operate independently — one failure does not block others | BullMQ Queue-per-scraper isolation pattern; sources table circuit breaker state |
-| DATA-04 | Every event has a stable unique ID generated from source URL hash | `crypto.createHash('sha256').update(url).digest('hex').slice(0, 16)` — stable across scrapes |
+| DATA-04 | Every event has a stable unique ID generated from source URL hash | `crypto.createHash('sha256').update(url).digest('hex').slice(0, 32)` — stable across scrapes |
 | DATA-06 | Scrapers respect robots.txt and rate limits | bilietai.lt robots.txt verified: only /search and /beta/ blocked for `*`; tiketa.lt robots.txt verified: `Disallow: /` for `*` — tiketa requires legal memo |
 | DATA-07 | Each scraper stores `last_successfully_scraped_at`; source marked degraded on failure | `sources` table with `last_successfully_scraped_at`, `consecutive_failures`, `status` enum |
 | GDPR-01 | Privacy policy accessible on all pages | `/privacy` route in Next.js App Router; link in global layout footer |
@@ -930,27 +930,31 @@ For Phase 1, the ROPA can be a Markdown file in the repo at `docs/gdpr/article-3
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Meilisearch exact version to pin**
    - What we know: Decision D-05/D-06 says `v1.x`. Current latest is unknown without Docker Hub check.
    - What's unclear: Whether to pin to a specific patch (e.g., `v1.13.3`) or use `v1` floating tag.
    - Recommendation: Pin to specific version for reproducibility. Check hub.docker.com/r/getmeili/meilisearch/tags and pin latest v1.x patch.
+   - **RESOLVED:** Pin to `v1.13.3` per Plan 01 (Docker Compose service definition). Patch-pinned for reproducibility, not floating `v1`.
 
 2. **pnpm version to specify in CI**
    - What we know: pnpm 9.x is current; pnpm 8.x was widely used in guides. The action `pnpm/action-setup@v3` accepts `version`.
    - What's unclear: Whether the project should pin pnpm 8 or 9.
    - Recommendation: Use pnpm 9 (latest stable). Add `"packageManager": "pnpm@9.x.x"` to root package.json.
+   - **RESOLVED:** Use `pnpm@9` per Plan 01 (`pnpm/action-setup@v3` version: 9 and root `packageManager` field).
 
 3. **Supabase connection pooler mode for worker**
    - What we know: Supabase offers Transaction and Session pooler modes. Long-running worker processes need Session mode.
    - What's unclear: Whether apps/worker should connect via Supabase connection string or direct Postgres URL.
    - Recommendation: Worker uses direct Postgres URL (not pooler) for long-running connections. Web uses Transaction pooler. Document both URLs in `.env.example`.
+   - **RESOLVED:** Worker uses direct Postgres URL, web uses Transaction pooler; both documented in `.env.example` comments per Plan 01.
 
 4. **LT IP lawyer timeline**
    - What we know: Legal memo in Phase 1 is self-authored; LT lawyer review is pre-Phase 2 prerequisite.
    - What's unclear: Whether Phase 2 can begin before lawyer response if bilietai.lt (lower risk) scraper is ready.
    - Recommendation: Allow Phase 2 bilietai.lt scraper to start concurrently with tiketa.lt lawyer review. Gate tiketa.lt scraper on lawyer clearance specifically.
+   - **RESOLVED:** LT lawyer review is a pre-Phase 2 prerequisite (not a Phase 1 blocker) per Plan 04; tiketa.lt scraper gated on lawyer clearance, bilietai.lt may proceed concurrently.
 
 ---
 
@@ -995,7 +999,7 @@ For Phase 1, the ROPA can be a Markdown file in the repo at `docs/gdpr/article-3
 | GDPR-01 | `/privacy` route returns 200 and contains privacy policy content | smoke | `pnpm --filter web test -- privacy` | No — Wave 0 |
 | GDPR-02 | CookieConsent component renders; analytics gated behind consent | unit | `pnpm --filter web test -- cookie-consent` | No — Wave 0 |
 | GDPR-03 | `docs/gdpr/article-30-ropa.md` exists and has all 8 required fields | manual | File exists check | No — Wave 0 |
-| GDPR-04 | Deleting a user record cascades to watchlist, alert_log rows | migration test | `pnpm --filter db test -- cascade-delete` | No — Wave 0 |
+| GDPR-04 | Deleting a user record cascades to watchlist, alert_log rows | migration test | `pnpm --filter db test -- schema` | No — Wave 0 |
 
 ### Sampling Rate
 - **Per task commit:** `pnpm --filter <package> test`
